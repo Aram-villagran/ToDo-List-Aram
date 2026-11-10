@@ -1,0 +1,24 @@
+# .NET / Visual Studio
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Archivos de configuración local con secretos: nunca se suben
+**/appsettings.Development.json
+**/appsettings.Local.json
+secrets.json
+
+# Archivos generados / temporales
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Paquetes y publicación
+packages/
+publish/
