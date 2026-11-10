@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Infrastructure\todoExample.MysqlDAL\todoExample.MysqlDAL.csproj" />
+        <ProjectReference Include="..\..\Infrastructure\todoExample.DapperDAL\todoExample.DapperDAL.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.15.0" />
+    </ItemGroup>
+
+</Project>

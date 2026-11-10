@@ -1,0 +1,129 @@
+@host = http://localhost:5031
+@password = Wk6%izNbTy
+
+GET {{host}}/api/v1/Home
+Accept: application/json
+
+###
+
+# @name login
+POST {{host}}/api/v1/Account/Login
+Content-Type: application/json
+
+{
+  "email": "doe@sacai.com.mx",
+  "password": "{{password}}"
+}
+
+###
+
+GET {{host}}/api/v1/Account
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Accept: application/json
+
+###
+
+POST {{host}}/api/v1/Account/RefreshToken
+Content-Type: application/json
+
+{
+  "accessToken": "{{login.response.body.$.accessToken}}",
+  "refreshToken": "{{login.response.body.$.refreshToken}}"
+}
+
+###
+
+# @name register
+POST {{host}}/api/v1/Account/Register
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "firstName": "Ana",
+  "lastName": "Pérez",
+  "email": "ana@sacai.com.mx",
+  "password": "Cambiar#123"
+}
+
+###
+
+# @name createList
+POST {{host}}/api/v1/TodoList
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "name": "Trabajo",
+  "description": "Lista de prueba"
+}
+
+###
+
+GET {{host}}/api/v1/TodoList
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Accept: application/json
+
+###
+
+# @name createTask
+POST {{host}}/api/v1/TodoTask?listId={{createList.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "title": "Preparar demo",
+  "description": "Probar la API",
+  "dueDate": "2026-11-01T17:00:00Z"
+}
+
+###
+
+GET {{host}}/api/v1/TodoTask?listId={{createList.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Accept: application/json
+
+###
+
+GET {{host}}/api/v1/TodoTask/pending
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Accept: application/json
+
+###
+
+# @name createTag
+POST {{host}}/api/v1/Tag
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+
+{
+  "name": "backend"
+}
+
+###
+
+GET {{host}}/api/v1/Tag
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Accept: application/json
+
+###
+
+POST {{host}}/api/v1/TodoTask/{{createTask.response.body.$.id}}/tags/{{createTag.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+###
+
+GET {{host}}/api/v1/TodoTask/{{createTask.response.body.$.id}}/tags
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Accept: application/json
+
+###
+
+PATCH {{host}}/api/v1/TodoTask/{{createTask.response.body.$.id}}/complete
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+###
+
+# Filtros (hoy falla: falta [HttpGet("search")] en TodoTaskController)
+GET {{host}}/api/v1/TodoTask/search?completed=false&tag=backend&text=demo
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Accept: application/json
