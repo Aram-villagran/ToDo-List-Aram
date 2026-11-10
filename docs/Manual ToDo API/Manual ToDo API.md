@@ -6,7 +6,7 @@
 **Audiencia:** desarrolladores que necesiten entender, ejecutar o mantener el proyecto
 **Alcance v1.0:** solo backend y base de datos. El frontend se documenta cuando se termine.
 
-> Este manual se escribe en Obsidian en Markdown y se entrega en Word. Cada versión del Word va a la carpeta `docs/` del repositorio y se envía a Omar o Julio para revisión por secciones.
+> Este manual se escribe en Obsidian en Markdown y se entrega en Word. Cada versión del Word va a la carpeta `docs/` del repositorio y se envía a Omar, Julio, Jorge o Victor para revisión por secciones.
 
 ## Mapa general
 
